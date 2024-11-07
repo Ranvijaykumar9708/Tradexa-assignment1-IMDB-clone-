@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_search/theme.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart'; // Import Google Fonts
 import 'movie_search_provider.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -12,7 +13,10 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: Text(
+          'Home',
+          style: GoogleFonts.roboto(), // Apply Google Font to AppBar title
+        ),
         backgroundColor: AppColors.white,
         elevation: 0,
       ),
@@ -24,6 +28,7 @@ class SearchScreen extends StatelessWidget {
               controller: _searchController,
               decoration: InputDecoration(
                 hintText: 'Search....',
+                hintStyle: GoogleFonts.roboto(), // Apply Google Font to hint
                 suffixIcon: const Icon(Icons.search),
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
@@ -42,7 +47,12 @@ class SearchScreen extends StatelessWidget {
                   if (provider.isLoading) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (provider.movies.isEmpty) {
-                    return const Center(child: Text('No results found.'));
+                    return Center(
+                      child: Text(
+                        'No results found.',
+                        style: GoogleFonts.roboto(), // Apply Google Font
+                      ),
+                    );
                   } else {
                     return ListView.builder(
                       itemCount: provider.movies.length,
@@ -50,8 +60,6 @@ class SearchScreen extends StatelessWidget {
                         final movie = provider.movies[index];
                         return ListTile(
                           leading: Container(
-                            height: 200,
-                            width: 130,
                             decoration: const BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
@@ -66,20 +74,33 @@ class SearchScreen extends StatelessWidget {
                               child: Image.network(
                                 movie.poster,
                                 height: 200,
-                                width: 130,
+                                width: 50,
                                 fit: BoxFit.cover,
                               ),
                             ),
                           ),
-                          title: Text(movie.title),
+                          title: Text(
+                            movie.title,
+                            style: GoogleFonts.roboto(
+                              fontWeight: FontWeight.bold,
+                            ), // Apply Google Font with bold weight
+                          ),
                           subtitle: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Year: ${movie.year}"),
-                              Text("Genre: ${movie.genre}"),
+                              Text(
+                                "Year: ${movie.year}",
+                                style: GoogleFonts.roboto(), // Apply Google Font
+                              ),
+                              Text(
+                                "Genre: ${movie.genre}",
+                                style: GoogleFonts.roboto(), // Apply Google Font
+                              ),
                               Text(
                                 "IMDb Rating: ${movie.imdbRating}",
-                                style: const TextStyle(color: AppColors.blue),
+                                style: GoogleFonts.roboto(
+                                  color: AppColors.blue,
+                                ), // Apply Google Font with color
                               ),
                             ],
                           ),
@@ -91,7 +112,9 @@ class SearchScreen extends StatelessWidget {
                             ),
                             child: Text(
                               movie.type,
-                              style: const TextStyle(color: AppColors.white),
+                              style: GoogleFonts.roboto(
+                                color: AppColors.white,
+                              ), // Apply Google Font with color
                             ),
                           ),
                         );
