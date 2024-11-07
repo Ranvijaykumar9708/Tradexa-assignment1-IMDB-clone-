@@ -21,7 +21,7 @@ class SearchScreen extends StatelessWidget {
         elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
             TextField(
@@ -58,63 +58,91 @@ class SearchScreen extends StatelessWidget {
                       itemCount: provider.movies.length,
                       itemBuilder: (context, index) {
                         final movie = provider.movies[index];
-                        return ListTile(
-                          leading: Container(
-                            decoration: const BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: AppColors.black,
-                                  blurRadius: 8,
-                                  offset: Offset(2, 4),
+
+                        return Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Container(
+                            height: MediaQuery.of(context).size.height / 4,
+                            child: Stack(
+                              children: [
+                                // Poster image positioned on the left
+
+                                // Text content positioned with shadow and text offset
+                                Positioned(
+                                  left:
+                                      0, // Start the shadow container from the very left
+                                  bottom: 0,
+                                  right: 0,
+                                  child: Material(
+                                    elevation: 8, // Shadow elevation
+                                    color: Colors
+                                        .transparent, // Transparent background for shadow effect
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Container(
+                                      padding: const EdgeInsets.only(
+                                          left: 170,
+                                          top: 8,
+                                          bottom: 8,
+                                          right:
+                                              8), // Offset text display by 160 pixels
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Colors.black.withOpacity(0.2),
+                                            blurRadius: 8,
+                                            offset: Offset(2, 4),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            movie.title,
+                                            style: GoogleFonts.roboto(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Text(
+                                            "Year: ${movie.year}",
+                                            style: GoogleFonts.roboto(),
+                                          ),
+                                          Text(
+                                            "Genre: ${movie.genre}",
+                                            style: GoogleFonts.roboto(),
+                                          ),
+                                          Text(
+                                            "IMDb Rating: ${movie.imdbRating}",
+                                            style: GoogleFonts.roboto(
+                                              color: AppColors.blue,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  left: 10,
+                                  bottom: 10,
+                                  child: Container(
+                                    height: MediaQuery.of(context).size.height /
+                                        4.2,
+                                    width: 150,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      image: DecorationImage(
+                                        image: NetworkImage(movie.poster),
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ],
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Image.network(
-                                movie.poster,
-                                height: 200,
-                                width: 50,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          title: Text(
-                            movie.title,
-                            style: GoogleFonts.roboto(
-                              fontWeight: FontWeight.bold,
-                            ), // Apply Google Font with bold weight
-                          ),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Year: ${movie.year}",
-                                style: GoogleFonts.roboto(), // Apply Google Font
-                              ),
-                              Text(
-                                "Genre: ${movie.genre}",
-                                style: GoogleFonts.roboto(), // Apply Google Font
-                              ),
-                              Text(
-                                "IMDb Rating: ${movie.imdbRating}",
-                                style: GoogleFonts.roboto(
-                                  color: AppColors.blue,
-                                ), // Apply Google Font with color
-                              ),
-                            ],
-                          ),
-                          trailing: Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: AppColors.green,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Text(
-                              movie.type,
-                              style: GoogleFonts.roboto(
-                                color: AppColors.white,
-                              ), // Apply Google Font with color
                             ),
                           ),
                         );
