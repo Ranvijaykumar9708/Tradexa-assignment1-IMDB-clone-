@@ -61,7 +61,7 @@ class SearchScreen extends StatelessWidget {
 
                         return Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: Container(
+                          child: SizedBox(
                             height: MediaQuery.of(context).size.height / 4,
                             child: Stack(
                               children: [
@@ -86,14 +86,14 @@ class SearchScreen extends StatelessWidget {
                                           right:
                                               8), // Offset text display by 160 pixels
                                       decoration: BoxDecoration(
-                                        color: Colors.white,
+                                        color: AppColors.white,
                                         borderRadius: BorderRadius.circular(8),
                                         boxShadow: [
                                           BoxShadow(
                                             color:
                                                 Colors.black.withOpacity(0.2),
                                             blurRadius: 8,
-                                            offset: Offset(2, 4),
+                                            offset: const Offset(2, 4),
                                           ),
                                         ],
                                       ),
