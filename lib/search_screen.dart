@@ -4,10 +4,23 @@ import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart'; // Import Google Fonts
 import 'movie_search_provider.dart';
 
-class SearchScreen extends StatelessWidget {
-  final TextEditingController _searchController = TextEditingController();
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({super.key});
 
-  SearchScreen({super.key});
+  @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
+  @override
+  void initState() {
+    Provider.of<MovieSearchProvider>(context, listen: false)
+        .searchMovies('all');
+    // TODO: implement initState
+    super.initState();
+  }
+
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +46,7 @@ class SearchScreen extends StatelessWidget {
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
               ),
-              onSubmitted: (query) {
+              onChanged: (query) {
                 if (query.isNotEmpty) {
                   Provider.of<MovieSearchProvider>(context, listen: false)
                       .searchMovies(query);

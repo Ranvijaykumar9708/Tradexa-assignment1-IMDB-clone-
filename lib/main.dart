@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           textTheme: GoogleFonts.robotoTextTheme(), // Apply Google Font
         ),
-        home: SearchScreen(),
+        home: const SearchScreen(),
       ),
     );
   }
